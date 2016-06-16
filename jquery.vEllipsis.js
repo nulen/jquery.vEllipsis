@@ -44,7 +44,7 @@
             var classList = $this.attr('class').split(/\s+/);
             var matchResult;
             $.each(classList, function(index, item) {
-                matchResult = item.match(/^vcms-ellipsis-lines-(\d+)$/);
+                matchResult = item.match(/^v-ellipsis-lines-(\d+)$/);
                 if (matchResult !== null)
                     opts.lines = Number(matchResult[1]);
             });

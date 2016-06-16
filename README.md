@@ -1,8 +1,12 @@
 jquery.vEllipsis
 ================
+Based on: https://github.com/STAR-ZERO/jquery-ellipsis plugin
 
+Pros:
 - handles events
-- handles screenResize
+- handles screen resize
+- no additional wrappers or styles needed
+- number of lines to show can be set by class
 
 Configuration:
 --------------

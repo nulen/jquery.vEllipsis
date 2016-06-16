@@ -1,9 +1,6 @@
 jquery.vEllipsis
 ================
 
-jQuery Ellipsis plugin
-----------------------
-
 - handles events
 - handles screenResize
 

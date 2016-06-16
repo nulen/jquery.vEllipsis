@@ -23,8 +23,6 @@
         if (options.tolerance < 1) options.tolerance = 1;
 
         function doEllipsis(el, opts) {
-            var time1 = performance.now();
-            // get element text
             var $this = $(el);
             var text;
 
@@ -112,9 +110,6 @@
             $this.data('lastWidth', $this.width());
 
             opts.callback.call(el);
-            timeTable['time'] += (performance.now() - time1);
-            timeTable['number']++;
-            // console.error('doEllipsis meanTime: ' + (timeTable['time']/timeTable['number']));
         }
 
         function runOnElements() {

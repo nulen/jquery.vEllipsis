@@ -11,9 +11,12 @@ Configuration:
 --------------
 Simply add:
 
-	$( document ).ready(function() {
-	    $().vEllipsis();
-	});
+	<script src="https://raw.githubusercontent.com/nulen/jquery.vEllipsis/master/jquery.vEllipsis.js"></script>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$().vEllipsis();
+		});
+	</script>
 	
 to your page for default settings and add class 'v-ellipsis' to your text container (element can't have fixed height);
 

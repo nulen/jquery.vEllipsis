@@ -17,7 +17,6 @@
         };
 
         var resizeTimer;
-        var timeTable = {'time': 0, 'number': 0};
 
         options = $.extend(defaults, options);
         if (options.tolerance < 1) options.tolerance = 1;

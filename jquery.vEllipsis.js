@@ -1,0 +1,147 @@
+/*! jQuery vEllipsis - v0.2 - 2016-06-15
+* Copyright (c) 2016; Licensed MIT */
+(function($) {
+    $.fn.vEllipsis = function(options) {
+
+        // default option
+        var defaults = {
+            'element': '.v-ellipsis', // element identifier
+            'lines' : 1, // show that many lines
+            'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
+            'char' : '...', // ellipsis
+            'callback': function() {}, // callback function
+            'responsive': false, // responsive to window resize
+            'tolerance': 5, // optimal tolerance
+            'delay': 500, // delay after resize
+            'elementEvent': 'change' // event to reEllipsise
+        };
+
+        var resizeTimer;
+        var timeTable = {'time': 0, 'number': 0};
+
+        options = $.extend(defaults, options);
+        if (options.tolerance < 1) options.tolerance = 1;
+
+        function doEllipsis(el, opts) {
+            var time1 = performance.now();
+            // get element text
+            var $this = $(el);
+            var text;
+
+            if ($this.data('lastHeight')) {
+                if ($this.data('lastHeight') === $this.height() && $this.data('lastWidth') === $this.width()
+                    && $this.data('lastText') === $this.text()) {
+                    return;
+                }
+            }
+
+            if ($this.data('originalText')) {
+                text = $this.data('originalText');
+                $this.text(text);
+            } else {
+                text = $this.text();
+                $this.data('originalText', text);
+            }
+
+            var classList = $this.attr('class').split(/\s+/);
+            var matchResult;
+            $.each(classList, function(index, item) {
+                matchResult = item.match(/^vcms-ellipsis-lines-(\d+)$/);
+                if (matchResult !== null)
+                    opts.lines = Number(matchResult[1]);
+            });
+
+            var origText = text;
+            var origLength = origText.length;
+            var origHeight = $this.height();
+
+            // get height
+            $this.text('a');
+            var lineHeight = parseFloat($this.css("lineHeight"), 10);
+            var rowHeight = $this.height();
+            var gapHeight = lineHeight > rowHeight ? (lineHeight - rowHeight) : 0;
+            var targetHeight = gapHeight * (opts.lines - 1) + rowHeight * opts.lines;
+
+            if (origHeight <= targetHeight) {
+                $this.text(text);
+
+                $this.data('lastText', text)
+                $this.data('lastHeight', $this.height());
+                $this.data('lastWidth', $this.width());
+                
+                opts.callback.call(el);
+                return;
+            }
+
+            // raw approximation of final length
+            var approxTargetRatio = (targetHeight + rowHeight) / (origHeight - (rowHeight + gapHeight));
+            if (approxTargetRatio > 1) approxTargetRatio = 1;
+            var approxTargetLength = Math.ceil(approxTargetRatio * origLength);
+
+            text = text.slice(0, approxTargetLength);
+
+            var start = Math.ceil(approxTargetLength/2), length = 0;
+            var end = approxTargetLength-1;
+
+            while (start + opts.tolerance - 1 < end) { // binary search for max length
+                length = Math.ceil((start + end) / 2);
+
+                $this.text(text.slice(0, length) + opts['char']);
+
+                if ($this.height() <= targetHeight) {
+                    start = length;
+                } else {
+                    end = length - opts.tolerance;
+                }
+            }
+
+            text = text.slice(0, start);
+
+            if (opts.onlyFullWords) {
+                text = text.replace(/\s(\w+)$/, ''); // remove fragment of the last word together
+            }
+
+            text = text.replace(/([:.,\s]+$)/g, ''); // cutting any left spaces, commas or dots at the end of text
+
+            text += opts['char'];
+
+            $this.text(text);
+
+            $this.data('lastText', text)
+            $this.data('lastHeight', $this.height());
+            $this.data('lastWidth', $this.width());
+
+            opts.callback.call(el);
+            timeTable['time'] += (performance.now() - time1);
+            timeTable['number']++;
+            // console.error('doEllipsis meanTime: ' + (timeTable['time']/timeTable['number']));
+        }
+
+        function runOnElements() {
+            $(options.element).each(function(){
+                doEllipsis(this, options);
+            });
+        }
+
+        function onResize() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                runOnElements();
+            }, options.delay);
+        }
+
+        if (options.responsive) {
+            $( window ).resize(function () {
+                onResize();
+            });
+        }
+
+        $(document).on(options.elementEvent, options.element, function() {
+            doEllipsis(this, options);
+        });
+
+        runOnElements();
+
+        return this;
+    };
+}) (jQuery);

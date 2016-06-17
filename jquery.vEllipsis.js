@@ -13,7 +13,8 @@
             'responsive': false, // responsive to window resize
             'tolerance': 5, // optimal tolerance
             'delay': 500, // delay after resize
-            'elementEvent': 'change' // event to reEllipsise
+            'elementEvent': 'change', // event to reEllipsise
+            'additionalEnding': false // additional link after char
         };
 
         var resizeTimer;
@@ -42,10 +43,11 @@
 
             var classList = $this.attr('class').split(/\s+/);
             var matchResult;
+            var lines = opts.lines;
             $.each(classList, function(index, item) {
                 matchResult = item.match(/^v-ellipsis-lines-(\d+)$/);
                 if (matchResult !== null)
-                    opts.lines = Number(matchResult[1]);
+                    lines = Number(matchResult[1]);
             });
 
             var origText = text;
@@ -54,10 +56,10 @@
 
             // get height
             $this.text('a');
-            var lineHeight = parseFloat($this.css("lineHeight"), 10);
+            var lineHeight = parseFloat($this.css('lineHeight'), 10);
             var rowHeight = $this.height();
             var gapHeight = lineHeight > rowHeight ? (lineHeight - rowHeight) : 0;
-            var targetHeight = gapHeight * (opts.lines - 1) + rowHeight * opts.lines;
+            var targetHeight = gapHeight * (lines - 1) + rowHeight * lines;
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
@@ -65,7 +67,7 @@
                 $this.data('lastText', text)
                 $this.data('lastHeight', $this.height());
                 $this.data('lastWidth', $this.width());
-                
+
                 opts.callback.call(el);
                 return;
             }
@@ -77,13 +79,19 @@
 
             text = text.slice(0, approxTargetLength);
 
-            var start = Math.ceil(approxTargetLength/2), length = 0;
+            var character = opts.char;
+            if (opts.additionalEnding && $this.data('link')) {
+                var link = $this.data('link');
+                $this.html(link);
+                character += ' ' + $this.text();
+            }
+            var start = lines === 1 ? 0 : Math.ceil(approxTargetLength/2), length = 0;
             var end = approxTargetLength-1;
 
             while (start + opts.tolerance - 1 < end) { // binary search for max length
                 length = Math.ceil((start + end) / 2);
 
-                $this.text(text.slice(0, length) + opts['char']);
+                $this.text(text.slice(0, length) + character);
 
                 if ($this.height() <= targetHeight) {
                     start = length;
@@ -100,9 +108,13 @@
 
             text = text.replace(/([:.,\s]+$)/g, ''); // cutting any left spaces, commas or dots at the end of text
 
-            text += opts['char'];
+            text += opts.char;
 
             $this.text(text);
+            
+            if (opts.additionalEnding && $this.data('link')) {
+                $this.append(' ' + link);
+            }
 
             $this.data('lastText', text)
             $this.data('lastHeight', $this.height());

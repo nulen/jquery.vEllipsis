@@ -5,16 +5,16 @@
 
         // default option
         var defaults = {
-            'element': '.v-ellipsis', // element identifier
-            'lines' : 1, // show that many lines
-            'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
-            'char' : '...', // ellipsis
-            'callback': function() {}, // callback function
-            'responsive': false, // responsive to window resize
-            'tolerance': 5, // optimal tolerance
-            'delay': 500, // delay after resize
-            'elementEvent': 'change', // event to reEllipsise
-            'additionalEnding': false // additional link after char
+            'element': '.v-ellipsis', 	// element identifier
+            'lines' : 1, 			// show that many lines
+            'onlyFullWords': false, 	// set to true to avoid cutting the text in the middle of a word
+            'char' : '...', 		// ellipsis
+            'callback': function() {}, 	// callback function
+            'responsive': false, 		// responsive to window resize
+            'tolerance': 5, 		// optimal tolerance
+            'delay': 500, 			// delay after resize
+            'elementEvent': 'change', 	// event to reEllipsise
+            'additionalEnding': false 	// additional link after char
         };
 
         var resizeTimer;

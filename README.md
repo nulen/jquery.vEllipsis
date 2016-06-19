@@ -1,5 +1,7 @@
 jquery.vEllipsis
 ================
+jQuery ellipsis plugin
+----------------------
 Based on: https://github.com/STAR-ZERO/jquery-ellipsis plugin
 
 Pros:

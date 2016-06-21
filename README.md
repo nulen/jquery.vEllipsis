@@ -26,16 +26,17 @@ to your page for default settings and add class 'v-ellipsis' to your text contai
 You can also extend them by adding configuration (below conf is the default one), e.g.:
 
 	$().vEllipsis({
-		'element': '.v-ellipsis',	// element identifier
-		'lines' : 1					// show that many lines
-		'onlyFullWords': false		// set to true to avoid cutting the text in the middle of a word
-		'char' : '...'				// ellipsis
-		'callback': function() {}	// callback function
-		'responsive': false			// responsive to window resize
-		'tolerance': 5				// optimal tolerance
-		'delay': 500				// delay after resize
-		'elementEvent': 'change'	// event to reEllipsise
-		'additionalEnding': false	// additional link after char
+		'element': '.v-ellipsis',			// element identifier
+		'lines' : 1							// show that many lines
+		'onlyFullWords': false				// set to true to avoid cutting the text in the middle of a word
+		'char' : '...'						// ellipsis
+		'callback': function() {}			// callback function
+		'responsive': false					// responsive to window resize
+		'tolerance': 5						// optimal tolerance
+		'delay': 500						// delay after resize
+		'elementEvent': 'change'			// event to reEllipsise
+		'additionalEnding': false,			// additional link after char
+		'linesClass': 'v-ellipsis-lines'    // class for changing number of lines
 	});
 
-Adding another class 'v-ellipsis-lines-4' changes target lines for this element to 4. You can put any number you want.
+Adding another class named in 'linesClass', e.g. 'v-ellipsis-lines-4' changes target lines for this element to 4. You can put any number you want.

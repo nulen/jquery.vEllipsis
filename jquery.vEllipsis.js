@@ -6,16 +6,17 @@
 
         // default option
         var defaults = {
-            'element': '.v-ellipsis',   // element identifier
-            'lines' : 1,                // show that many lines
-            'onlyFullWords': false,     // set to true to avoid cutting the text in the middle of a word
-            'char' : '...',             // ellipsis
-            'callback': function() {},  // callback function
-            'responsive': false,        // responsive to window resize
-            'tolerance': 5,             // optimal tolerance
-            'delay': 500,               // delay after resize
-            'elementEvent': 'change',   // event to reEllipsise
-            'additionalEnding': false   // additional link after char
+            'element': '.v-ellipsis',           // element identifier
+            'lines' : 1,                        // show that many lines
+            'onlyFullWords': false,             // set to true to avoid cutting the text in the middle of a word
+            'char' : '...',                     // ellipsis
+            'callback': function() {},          // callback function
+            'responsive': false,                // responsive to window resize
+            'tolerance': 5,                     // optimal tolerance
+            'delay': 500,                       // delay after resize
+            'elementEvent': 'change',           // event to reEllipsise
+            'additionalEnding': false,          // additional link after char
+            'linesClass': 'v-ellipsis-lines'    // class for changing number of lines
         };
 
         var resizeTimer;
@@ -45,8 +46,9 @@
             var classList = $this.attr('class').split(/\s+/);
             var matchResult;
             var lines = opts.lines;
+            var regEx = new RegExp("^" + opts.linesClass + "-(\\d+)$");
             $.each(classList, function(index, item) {
-                matchResult = item.match(/^v-ellipsis-lines-(\d+)$/);
+                matchResult = item.match(regEx);
                 if (matchResult !== null)
                     lines = Number(matchResult[1]);
             });

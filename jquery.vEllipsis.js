@@ -109,7 +109,7 @@
                 text = text.slice(0, start);
     
                 if (opts.onlyFullWords) {
-                    text = text.replace(/\s(\w+)$/, ''); // remove fragment of the last word together
+                    text = text.replace(/\s([^\s.]+)$/, ''); // remove fragment of the last word together
                 }
     
                 text = text.replace(/([:.,\s]+$)/g, ''); // cutting any left spaces, commas or dots at the end of text

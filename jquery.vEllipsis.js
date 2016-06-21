@@ -1,6 +1,6 @@
 /*! jQuery vEllipsis - v0.2 - 2016-06-15
 * https://github.com/nulen/jquery.vEllipsis
-* Copyright (c) 2016; Licensed MIT */
+* Copyright (c) 2016 Nulen; Licensed MIT */
 (function($) {
     $.fn.vEllipsis = function(options) {
 

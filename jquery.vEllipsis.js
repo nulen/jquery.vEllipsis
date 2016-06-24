@@ -15,7 +15,7 @@
             'tolerance': 5,                     // optimal tolerance
             'delay': 500,                       // delay after resize
             'elementEvent': 'change',           // event to reEllipsise
-            'additionalEnding': false,          // additional link after char
+            'additionalEnding': false,          // additional link after char (from data-link on element)
             'linesClass': 'v-ellipsis-lines'    // class for changing number of lines
         };
 

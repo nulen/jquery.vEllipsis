@@ -37,6 +37,9 @@ You can also extend them by adding configuration (below conf is the default one)
 		'delay': 500						// delay after resize
 		'elementEvent': 'change'			// event to reEllipsise
 		'additionalEnding': false,			// additional link after char (from data-link on element)
+		'expandLink': false,                // expand link after char and additional link (from data-expandlink on element)
+		'collapseLink': false,              // collapse link after char and additional link (from data-collapselink on element)
+		'animationTime': '0',               // time for animations
 		'linesClass': 'v-ellipsis-lines'    // class for changing number of lines
 	});
 

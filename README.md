@@ -10,6 +10,7 @@ Pros:
 - no additional wrappers or styles needed
 - number of lines to show can be set by class
 - additional ending html element can be added individually for each element thorugh data property
+- lazy ellipsis - process only records that are visible
 
 Configuration:
 --------------

@@ -34,8 +34,8 @@ You can also extend them by adding configuration (below conf is the default one)
 		'char' : '...'				// ellipsis
 		'callback': function() {}		// callback function
 		'responsive': false			// responsive to window resize
-		'tolerance': 5				// optimal tolerance
-		'delay': 500				// delay after resize
+		'tolerance': 5				// optimal tolerance (best value is 5 based on tests)
+		'delay': 300				// delay after resize
 		'elementEvent': 'change'		// event to reEllipsise
 		'additionalEnding': false,		// additional link after char (from data-link on element)
 		'expandLink': false,			// expand link after char and additional link (from data-expandlink on element)

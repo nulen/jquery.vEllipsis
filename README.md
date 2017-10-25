@@ -8,9 +8,9 @@ Pros:
 - handles events
 - handles screen resize
 - no additional wrappers or styles needed
-- number of lines to show can be set by class
+- number of lines to show can be set using class (e.g. 'v-ellipsis-lines-4')
 - additional ending html element can be added individually for each element thorugh data property
-- lazy ellipsis - process only records that are visible
+- lazy ellipsis - process only fields that are visible
 
 Configuration:
 --------------
@@ -25,7 +25,7 @@ Simply add:
 	
 to your page for default settings and add class 'v-ellipsis' to your text container (element can't have fixed height);
 
-You can also extend them by adding configuration (below conf is the default one), e.g.:
+You can also extend them by adding configuration (below configuration is the default one), e.g.:
 
 	$().vEllipsis({
 		'element': '.v-ellipsis',		// element identifier
@@ -44,4 +44,4 @@ You can also extend them by adding configuration (below conf is the default one)
 		'linesClass': 'v-ellipsis-lines'	// class for changing number of lines
 	});
 
-Adding another class named in 'linesClass', e.g. 'v-ellipsis-lines-4' changes target lines for this element to 4. You can put any number you want.
+Adding additional class with a name specified in 'linesClass' setting, e.g. 'v-ellipsis-lines-4', changes target lines for this element to 4. You can put any number you want.

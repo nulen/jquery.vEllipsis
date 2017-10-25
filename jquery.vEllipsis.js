@@ -1,4 +1,4 @@
-/*! jQuery vEllipsis - v0.3 - 2017-03-27
+/*! jQuery vEllipsis - v0.4 - 2017-10-25
  * https://github.com/nulen/jquery.vEllipsis
  * Copyright (c) 2017 Nulen; Licensed MIT */
 (function ($) {
@@ -47,7 +47,7 @@
 			var elemTop = $elem.offset().top;
 			var elemBottom = elemTop + $elem.height();
 
-			return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+			return !(elemTop > docViewBottom || elemBottom < docViewTop);
 		}
 
 		function doEllipsis($elem, opts) {

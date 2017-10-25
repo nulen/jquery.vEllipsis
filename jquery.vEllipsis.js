@@ -1,4 +1,4 @@
-/*! jQuery vEllipsis - v0.4 - 2017-10-25
+/*! jQuery vEllipsis - v0.3.1 - 2017-10-25
  * https://github.com/nulen/jquery.vEllipsis
  * Copyright (c) 2017 Nulen; Licensed MIT */
 (function ($) {
